@@ -19,9 +19,10 @@ public class ConsumerRouteBuilder extends RouteBuilder {
         @Override
         public void process(Exchange exchange) {
             //обработка принятых данных
-            Gson gson = new Gson();
-            User user = gson.fromJson(exchange.getMessage().getBody().toString(), User.class);
-            System.out.println("Новое сообщение: " + user + " от: " + exchange.getFromEndpoint().getEndpointUri());
+        //    Gson gson = new Gson();
+        //    User user = gson.fromJson(exchange.getMessage().getBody().toString(), User.class);
+           // System.out.println("Новое сообщение: " + user + " от: " + exchange.getFromEndpoint().getEndpointUri());
+            System.out.println("Новое сообщение: " + exchange.getMessage().getBody().toString() + " от: " + exchange.getFromEndpoint().getEndpointUri());
         }
     }
 }
