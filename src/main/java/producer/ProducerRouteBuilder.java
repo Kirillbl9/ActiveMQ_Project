@@ -1,16 +1,15 @@
-package Producer;
+package producer;
 
+import model.User;
 import org.apache.camel.builder.RouteBuilder;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Date;
-
 public class ProducerRouteBuilder extends RouteBuilder {
+
     @Override
     public void configure() {
+        User user = new User(1, "Tom");
         from("timer:foo?period=3000")
-                .setBody(() -> new Date())
+                .setBody(user::toJson)
                 .to("jms:topic:newtopic");
     }
 }

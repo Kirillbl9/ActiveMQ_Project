@@ -1,5 +1,9 @@
-package Consumer;
+package consumer;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import model.User;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
@@ -15,7 +19,9 @@ public class ConsumerRouteBuilder extends RouteBuilder {
         @Override
         public void process(Exchange exchange) {
             //обработка принятых данных
-            System.out.println("Новое сообщение: " + exchange.getIn().getBody() + " от: " + exchange.getFromEndpoint().getEndpointUri());
+            Gson gson = new Gson();
+            User user = gson.fromJson(exchange.getMessage().getBody().toString(), User.class);
+            System.out.println("Новое сообщение: " + user + " от: " + exchange.getFromEndpoint().getEndpointUri());
         }
     }
 }
